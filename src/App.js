@@ -1,11 +1,14 @@
-import React from "react";
+import React from 'react';
+import { Container } from '@material-ui/core';
+import Header from './components/Header';
+import Home from './components/Home';
 
 const App = () => {
   return (
-    <>
-      <h1>Lambda Eats</h1>
-      <p>You can remove this code and create your own header</p>
-    </>
+    <Container>
+      <Header />
+      <Home />
+    </Container>
   );
 };
 export default App;
