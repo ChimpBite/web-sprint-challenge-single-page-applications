@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { BottomNavigationAction, Box } from '@material-ui/core';
+import { Button, Box } from '@material-ui/core';
+import { SportsRugbySharp } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -12,8 +13,11 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: 'url(https://source.unsplash.com/MQUqbmszGGM/1600x900)',
   },
   button: {
-    verticalAlign: 'bottom',
-    textAlign: 'center',
+    bottom: -400,
+    borderRadius: 10,
+    backgroundColor: 'rgba(255,255,255,0.3)',
+    fontSize: '2rem',
+    width: '20%',
   },
 }));
 
@@ -22,13 +26,10 @@ export const Home = () => {
 
   return (
     <Box className={classes.box}>
-      <Box
-        className={classes.img}
-        position='relative'
-        textAlign='center'
-        verticalAlign='bottom'
-      >
-        <button position='absolute'>Pizza?</button>
+      <Box className={classes.img} position='relative' textAlign='center'>
+        <Button className={classes.button} position='absolute'>
+          Pizza?
+        </Button>
       </Box>
     </Box>
   );
