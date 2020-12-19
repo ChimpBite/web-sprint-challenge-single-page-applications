@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, Typography, Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -9,23 +10,27 @@ const useStyles = makeStyles((theme) => ({
     padding: 20,
   },
   h1: {
-    fontSize: '2rem',
+    fontSize: '2.5rem',
   },
 }));
 
-export const Header = () => {
+const Header = () => {
   const classes = useStyles();
 
   return (
-    <Box className={classes.box} border='1px solid black'>
+    <Box className={classes.box}>
       <Box flexGrow={1} marginLeft={5}>
         <Typography className={classes.h1} variant='h1' component='h1'>
           Lambda Eats
         </Typography>
       </Box>
       <Box>
-        <Button>Home</Button>
-        <Button>Help</Button>
+        <Link to='/'>
+          <Button>Home</Button>
+        </Link>
+        <Link to='/'>
+          <Button>Help</Button>
+        </Link>
       </Box>
     </Box>
   );
