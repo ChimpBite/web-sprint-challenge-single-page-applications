@@ -15,6 +15,7 @@ import {
   TextField,
   FormHelperText,
   Switch,
+  Button,
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -55,8 +56,31 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     minWidth: '100%',
   },
+  selectControl: {
+    minWidth: '95%',
+  },
   selectEmpty: {
     marginTop: theme.spacing(2),
+  },
+  button: {
+    borderRadius: 10,
+    backgroundColor: 'red',
+    color: 'white',
+    fontSize: '1.5rem',
+    width: '100%',
+    '@media (max-width:550px)': {
+      marginTop: 10,
+    },
+  },
+
+  boxflex: {
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary,
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    '@media (max-width:550px)': {
+      flexDirection: 'column',
+    },
   },
 }));
 
@@ -65,9 +89,7 @@ const Pizza = (props) => {
 
   let history = useHistory();
   const [form, setForm] = useState({
-    name: '',
-    sauce: 'Original Red',
-    quantity: '1',
+    Quantity: '1',
   });
 
   const handleCheckbox = (e) => {
@@ -85,335 +107,386 @@ const Pizza = (props) => {
 
   return (
     <Container maxWidth='sm'>
-      <Box>
-        <Typography className={classes.h2} variant='h2' component='h2'>
-          Build Your Own Pizza
-        </Typography>
-        <Box className={classes.img}></Box>
-      </Box>
-      <Box className={classes.root}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            console.log(form);
-            props.setOrder(form);
-            history.push('/confirmation');
-          }}
-        >
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Box className={classes.row}>
-                <Typography className={classes.h3} variant='h3' component='h3'>
-                  Build Your Own Pizza
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.row}>
-                <TextField
-                  className={classes.formControl}
-                  id='standard-basic'
-                  label='Name'
-                  onChange={handleForm}
-                  value={form.name}
-                  placeholder='Name'
-                  min={2}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.rowdark}>
-                <Typography className={classes.h3} variant='h3' component='h3'>
-                  Choice of Size
-                </Typography>
-                <Typography className={classes.p} variant='p' component='p'>
-                  Required
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.rowcustom}>
-                <FormControl className={classes.formControl}>
-                  <Select
-                    name='size'
-                    onChange={handleForm}
-                    displayEmpty
-                    className={classes.selectEmpty}
-                    inputProps={{ 'aria-label': 'Without label' }}
+      <Box border='1px solid black'>
+        <Box>
+          <Typography className={classes.h2} variant='h2' component='h2'>
+            Build Your Own Pizza
+          </Typography>
+          <Box className={classes.img}></Box>
+        </Box>
+        <Box className={classes.root}>
+          <form>
+            <Grid container spacing={3}>
+              <Grid item xs={12}>
+                <Box className={classes.row}>
+                  <Typography
+                    className={classes.h3}
+                    variant='h3'
+                    component='h3'
                   >
-                    <FormHelperText>Select Size</FormHelperText>
-                    <MenuItem value='small'>Small</MenuItem>
-                    <MenuItem value='medium'>Medium</MenuItem>
-                    <MenuItem value='larger'>Large</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.rowdark}>
-                <Typography className={classes.h3} variant='h3' component='h3'>
-                  Choice of Sauce
-                </Typography>
-                <Typography className={classes.p} variant='p' component='p'>
-                  Required
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box
-                className={classes.rowcustom}
-                display='flex'
-                flexDirection='column'
-              >
-                <FormControlLabel
-                  value='originalred'
-                  name='sauce'
-                  id='original-red'
-                  control={<Radio />}
-                  onChange={handleForm}
-                  label='Original Red'
-                  checked={form.sauce === 'originalred'}
-                />
-                <FormControlLabel
-                  value='garlicranch'
-                  name='sauce'
-                  id='garlic-ranch'
-                  control={<Radio />}
-                  onChange={handleForm}
-                  label='Garlic Ranch'
-                  checked={form.sauce === 'garlicranch'}
-                />
-                <FormControlLabel
-                  value='bbqsauce'
-                  name='sauce'
-                  id='bbqsauce'
-                  control={<Radio />}
-                  onChange={handleForm}
-                  label='BBQ Sauce'
-                  checked={form.sauce === 'bbqsauce'}
-                />
-                <FormControlLabel
-                  value='spinachalfredo'
-                  name='sauce'
-                  id='spinach-alfredo'
-                  control={<Radio />}
-                  onChange={handleForm}
-                  label='Spinach Alfredo'
-                  checked={form.sauce === 'spinachalfredo'}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.rowdark}>
-                <Typography className={classes.h3} variant='h3' component='h3'>
-                  Add Toppings
-                </Typography>
-                <Typography className={classes.p} variant='p' component='p'>
-                  Choose up to 10
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.rowcustom} display='flex'>
-                <Box display='flex' flexDirection='column'>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.pepperoni === true}
-                        onChange={handleCheckbox}
-                        name='pepperoni'
-                        value='pepperoni'
-                      />
-                    }
-                    label='Pepperoni'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.sausage === true}
-                        onChange={handleCheckbox}
-                        name='sausage'
-                        value='sausage'
-                      />
-                    }
-                    label='Sausage'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.canadian === true}
-                        onChange={handleCheckbox}
-                        name='canadian'
-                        value='canadian'
-                      />
-                    }
-                    label='Canadian Bacon'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.spicyitaliansausage === true}
-                        onChange={handleCheckbox}
-                        name='spicyitaliansausage'
-                        value='spicyitaliansausage'
-                      />
-                    }
-                    label='Spicy Italian Sausage'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.grilledchicken === true}
-                        onChange={handleCheckbox}
-                        name='grilledchicken'
-                        value='grilledchicken'
-                      />
-                    }
-                    label='Grilled Chicken'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.onions === true}
-                        onChange={handleCheckbox}
-                        name='onions'
-                        value='onions'
-                      />
-                    }
-                    label='Onions'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.greenpepper === true}
-                        onChange={handleCheckbox}
-                        name='greenpeppers'
-                        value='greenpeppers'
-                      />
-                    }
-                    label='Green Peppers'
+                    Build Your Own Pizza
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.row}>
+                  <input
+                    data-test='name'
+                    required
+                    onChange={handleForm}
+                    value={form.name}
+                    type='text'
+                    name='Name'
+                    placeholder='Name'
+                    min={2}
                   />
                 </Box>
-                <Box display='flex' flexDirection='column' marginLeft={3}>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.rowdark}>
+                  <Typography
+                    className={classes.h3}
+                    variant='h3'
+                    component='h3'
+                  >
+                    Choice of Size
+                  </Typography>
+                  <Typography className={classes.p} variant='p' component='p'>
+                    Required
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.rowcustom}>
+                  <FormControl className={classes.selectControl}>
+                    <Select
+                      name='Size'
+                      onChange={handleForm}
+                      displayEmpty
+                      className={classes.selectEmpty}
+                      inputProps={{ 'aria-label': 'Without label' }}
+                      border='1px solid black'
+                    >
+                      <FormHelperText>Select Size</FormHelperText>
+                      <MenuItem value='Small'>Small</MenuItem>
+                      <MenuItem value='Medium'>Medium</MenuItem>
+                      <MenuItem value='Large'>Large</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.rowdark}>
+                  <Typography
+                    className={classes.h3}
+                    variant='h3'
+                    component='h3'
+                  >
+                    Choice of Sauce
+                  </Typography>
+                  <Typography className={classes.p} variant='p' component='p'>
+                    Required
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box
+                  className={classes.rowcustom}
+                  display='flex'
+                  flexDirection='column'
+                >
                   <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.dicedtomatos === true}
-                        onChange={handleCheckbox}
-                        name='dicedtomatos'
-                        value='dicedtomatos'
-                      />
-                    }
-                    label='Siced Tomatos'
+                    value='Original Red'
+                    name='Sauce'
+                    id='original-red'
+                    control={<Radio />}
+                    onChange={handleForm}
+                    label='Original Red'
+                    checked={form.Sauce === 'Original Red'}
                   />
                   <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.blackolives === true}
-                        onChange={handleCheckbox}
-                        name='blackolives'
-                        value='blackolives'
-                      />
-                    }
-                    label='Black Olives'
+                    value='Garlic Ranch'
+                    name='Sauce'
+                    id='garlic-ranch'
+                    control={<Radio />}
+                    onChange={handleForm}
+                    label='Garlic Ranch'
+                    checked={form.Sauce === 'Garlic Ranch'}
                   />
                   <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.roastedgarlic === true}
-                        onChange={handleCheckbox}
-                        name='roastedgarlic'
-                        value='roastedgarlic'
-                      />
-                    }
-                    label='Roasted Garlic'
+                    value='BBQ Sauce'
+                    name='Sauce'
+                    id='bbqsauce'
+                    control={<Radio />}
+                    onChange={handleForm}
+                    label='BBQ Sauce'
+                    checked={form.Sauce === 'BBQ Sauce'}
                   />
                   <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.artichokehearts === true}
-                        onChange={handleCheckbox}
-                        name='artichokehearts'
-                        value='artichokehearts'
-                      />
-                    }
-                    label='Artichoke Hearts'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.threecheese === true}
-                        onChange={handleCheckbox}
-                        name='threecheese'
-                        value='threecheese'
-                      />
-                    }
-                    label='Three Cheese'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.pineapple === true}
-                        onChange={handleCheckbox}
-                        name='pineapple'
-                        value='pineapple'
-                      />
-                    }
-                    label='Pineapple'
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={form.extracheese === true}
-                        onChange={handleCheckbox}
-                        name='extracheese'
-                        value='extracheese'
-                      />
-                    }
-                    label='Extra Cheese'
+                    value='Spinach Alfredo'
+                    name='Sauce'
+                    id='spinach-alfredo'
+                    control={<Radio />}
+                    onChange={handleForm}
+                    label='Spinach Alfredo'
+                    checked={form.Sauce === 'Spinach Alfredo'}
                   />
                 </Box>
-              </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.rowdark}>
+                  <Typography
+                    className={classes.h3}
+                    variant='h3'
+                    component='h3'
+                  >
+                    Add Toppings
+                  </Typography>
+                  <Typography className={classes.p} variant='p' component='p'>
+                    Choose up to 10
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.rowcustom} display='flex'>
+                  <Box display='flex' flexDirection='column'>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Pepperoni === true}
+                          onChange={handleCheckbox}
+                          name='Pepperoni'
+                          value='Pepperoni'
+                        />
+                      }
+                      label='Pepperoni'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Sausage === true}
+                          onChange={handleCheckbox}
+                          name='Sausage'
+                          value='Sausage'
+                        />
+                      }
+                      label='Sausage'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Canadian_Bacon === true}
+                          onChange={handleCheckbox}
+                          name='Canadian_Bacon'
+                          value='Canadian Bacon'
+                        />
+                      }
+                      label='Canadian Bacon'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Spicy_Italian_Sausage === true}
+                          onChange={handleCheckbox}
+                          name='Spicy_Italian_Sausage'
+                          value='Spicy Italian Sausage'
+                        />
+                      }
+                      label='Spicy Italian Sausage'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Grilled_Chicken === true}
+                          onChange={handleCheckbox}
+                          name='Grilled_Chicken'
+                          value='Grilled Chicken'
+                        />
+                      }
+                      label='Grilled Chicken'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Onions === true}
+                          onChange={handleCheckbox}
+                          name='Onions'
+                          value='Onions'
+                        />
+                      }
+                      label='Onions'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Green_Peppers === true}
+                          onChange={handleCheckbox}
+                          name='Green_Peppers'
+                          value='Green Peppers'
+                        />
+                      }
+                      label='Green Peppers'
+                    />
+                  </Box>
+                  <Box display='flex' flexDirection='column' marginLeft={3}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Diced_Tomatos === true}
+                          onChange={handleCheckbox}
+                          name='Diced_Tomatos'
+                          value='Diced Tomatos'
+                        />
+                      }
+                      label='Diced Tomatos'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Black_Olives === true}
+                          onChange={handleCheckbox}
+                          name='Black_Olives'
+                          value='Black Olives'
+                        />
+                      }
+                      label='Black Olives'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Roasted_Garlic === true}
+                          onChange={handleCheckbox}
+                          name='Roasted_Garlic'
+                          value='Roasted Garlic'
+                        />
+                      }
+                      label='Roasted Garlic'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Artichoke_Hearts === true}
+                          onChange={handleCheckbox}
+                          name='Artichoke_Hearts'
+                          value='Artichoke Hearts'
+                        />
+                      }
+                      label='Artichoke Hearts'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Three_Cheese === true}
+                          onChange={handleCheckbox}
+                          name='Three_Cheese'
+                          value='Three Cheese'
+                        />
+                      }
+                      label='Three Cheese'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Pineapple === true}
+                          onChange={handleCheckbox}
+                          name='Pineapple'
+                          value='Pineapple'
+                        />
+                      }
+                      label='Pineapple'
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={form.Extra_Cheese === true}
+                          onChange={handleCheckbox}
+                          name='Extra_Cheese'
+                          value='Extra Cheese'
+                        />
+                      }
+                      label='Extra Cheese'
+                    />
+                  </Box>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.rowdark}>
+                  <Typography
+                    className={classes.h3}
+                    variant='h3'
+                    component='h3'
+                  >
+                    Choice of Substitute
+                  </Typography>
+                  <Typography className={classes.p} variant='p' component='p'>
+                    Choose up to 1
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.row}>
+                  <FormControlLabel
+                    control={<Switch />}
+                    label='Gluten Free Crust (+ $100)'
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.rowdark}>
+                  <Typography
+                    className={classes.h3}
+                    variant='h3'
+                    component='h3'
+                  >
+                    Special Instructions
+                  </Typography>
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.row}>
+                  <TextField
+                    className={classes.formControl}
+                    id='outlined-multiline-static'
+                    multiline
+                    rows={4}
+                    defaultValue="Anything else you'd like to add?"
+                    variant='outlined'
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box className={classes.boxflex} border='1px solid black'>
+                  <Box>
+                    <TextField
+                      className={classes.formControl}
+                      id='outlined-number'
+                      label='Quantity'
+                      type='number'
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      variant='outlined'
+                    />
+                  </Box>
+                  <Box>
+                    <Button
+                      className={classes.button}
+                      id='submit'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        console.log(form);
+                        props.setOrder(form);
+                        history.push('/confirmation');
+                      }}
+                    >
+                      Add to Order
+                    </Button>
+                  </Box>
+                </Box>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.rowdark}>
-                <Typography className={classes.h3} variant='h3' component='h3'>
-                  Choice of Substitute
-                </Typography>
-                <Typography className={classes.p} variant='p' component='p'>
-                  Choose up to 1
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.row}>
-                <FormControlLabel
-                  control={<Switch />}
-                  label='Gluten Free Crust (+ $100)'
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.rowdark}>
-                <Typography className={classes.h3} variant='h3' component='h3'>
-                  Special Instructions
-                </Typography>
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box className={classes.row}>
-                <TextField
-                  className={classes.formControl}
-                  id='outlined-multiline-static'
-                  multiline
-                  rows={4}
-                  defaultValue="Anything else you'd like to add?"
-                  variant='outlined'
-                />
-              </Box>
-            </Grid>
-          </Grid>
-        </form>
+          </form>
+        </Box>
       </Box>
     </Container>
   );
