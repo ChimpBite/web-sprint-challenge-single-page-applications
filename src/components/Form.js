@@ -29,11 +29,7 @@ const Form = () => {
   const classes = useStyles();
   const [size, setSize] = useState('');
   const [value, setValue] = useState('originalred');
-  const [state, setState] = useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
-  });
+  const [state, setState] = useState(false);
 
   const handleChange = (event) => {
     setSize(event.target.value);
@@ -41,7 +37,15 @@ const Form = () => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
-  const { gilad, jason, antoine } = state;
+  const {
+    pepperoni,
+    sausage,
+    canadian,
+    spicysausage,
+    grilledchicken,
+    onions,
+    greenpepper,
+  } = state;
 
   return (
     <Container>
@@ -144,32 +148,72 @@ const Form = () => {
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={gilad}
+                        checked={pepperoni}
                         onChange={handleChange}
-                        name='gilad'
+                        name='pepperoni'
                       />
                     }
-                    label='Gilad Gray'
+                    label='Pepperoni'
                   />
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={jason}
+                        checked={sausage}
                         onChange={handleChange}
-                        name='jason'
+                        name='sausage'
                       />
                     }
-                    label='Jason Killian'
+                    label='Sausage'
                   />
                   <FormControlLabel
                     control={
                       <Checkbox
-                        checked={antoine}
+                        checked={canadian}
                         onChange={handleChange}
-                        name='antoine'
+                        name='canadian'
                       />
                     }
-                    label='Antoine Llorca'
+                    label='Canadian Bacon'
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={spicysausage}
+                        onChange={handleChange}
+                        name='spicysausage'
+                      />
+                    }
+                    label='Spicy Italian Sausage'
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={grilledchicken}
+                        onChange={handleChange}
+                        name='grilledchicken'
+                      />
+                    }
+                    label='Grilled Chicken'
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={onions}
+                        onChange={handleChange}
+                        name='onions'
+                      />
+                    }
+                    label='Onions'
+                  />
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={greenpepper}
+                        onChange={handleChange}
+                        name='greenpepper'
+                      />
+                    }
+                    label='Green Pepper'
                   />
                 </FormGroup>
               </FormControl>
