@@ -25,15 +25,14 @@ const Header = () => {
         </Typography>
       </Box>
       <Box>
-        <Link to='/'>
+        <Link to='/' style={{ textDecoration: 'none' }}>
           <Button>Home</Button>
         </Link>
-        <Link to='/'>
+        <Link to='/' style={{ textDecoration: 'none' }}>
           <Button>Help</Button>
         </Link>
       </Box>
     </Box>
   );
 };
-
 export default Header;

@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgba(255,255,255,0.3)',
     fontSize: '2rem',
     width: '20%',
+    underline: 'none',
   },
 }));
 
@@ -28,7 +29,7 @@ const Home = () => {
   return (
     <Box className={classes.box}>
       <Box className={classes.img} position='relative' textAlign='center'>
-        <Link to='/Form'>
+        <Link to='/Pizza' style={{ textDecoration: 'none' }}>
           <Button className={classes.button} position='absolute'>
             Pizza?
           </Button>
@@ -270,5 +271,4 @@ const Home = () => {
     </Box>
   );
 };
-
 export default Home;

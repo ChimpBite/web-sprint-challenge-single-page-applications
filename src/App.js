@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import { Container } from '@material-ui/core';
 import Header from './components/Header';
-import Form from './components/Form';
+import Pizza from './components/Pizza';
 import Home from './components/Home';
 import Footer from './components/Footer';
 
@@ -14,13 +14,12 @@ class App extends Component {
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/form'>
-          <Form />
+        <Route path='/pizza'>
+          <Pizza />
         </Route>
         <Footer />
       </Container>
     );
   }
 }
-
 export default App;
